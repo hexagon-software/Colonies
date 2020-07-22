@@ -81,14 +81,14 @@ public class SplashScreenState implements IState {
 
 	@Override
 	public void mousePressed(int x, int y) {
-		// TODO Auto-generated method stub
-		
+		textFinished = true;
+		engine.getResourceManager().getSound("hexagonIntro").stopSound();
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		textFinished = true;
+		engine.getResourceManager().getSound("hexagonIntro").stopSound();
 	}
 
 	@Override

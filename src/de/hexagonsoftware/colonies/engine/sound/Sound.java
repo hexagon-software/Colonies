@@ -42,6 +42,11 @@ public class Sound {
         }
         clip.start();
     }
+    
+	public synchronized void stopSound() {
+		this.clip.stop();
+		this.clip.close();
+	}
 
     /**
      * Can be used to set the Volume of the Sound. Doesnt work whilst sound is playing.
