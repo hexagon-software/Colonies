@@ -1,0 +1,18 @@
+(Document is in german, feel free to translate)
+
+Ideen und Konzepte für Colonies.
+
+Geländefelder:
+	Jedes feld kann max. 1 Gebäude haben.
+	Am rand der felder können Verteidigungen gebaut werden.
+	Felder können mit Straßen verbunden werden.
+	Besitzer der Felder werden anhand der Farbe der Feldzahl
+	angezeigt.
+
+Gebäude:
+	Gebäude werden in der Mitte von Geländefeldern Erstellt
+	Jedes feld kann max. 1 Gebäude haben.
+
+	> Sägewerk (Kostet 1 Holz und 1 Stein), Gibt 1 Holz
+	> Steinbruch (Kostest das Selbe), Gibt 1 Stein
+	> Siedlung (Kostet 2 Holz und Stein), Gibt 1 Gold
