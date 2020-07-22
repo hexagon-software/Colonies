@@ -8,8 +8,6 @@ import java.awt.Point;
 import de.hexagonsoftware.colonies.engine.graphics.polys.Hexagon;
 import de.hexagonsoftware.colonies.game.Game;
 import de.hexagonsoftware.colonies.game.tiles.ITile;
-import de.hexagonsoftware.colonies.game.util.Vector3;
-import de.hexagonsoftware.colonies.game.util.Vector3d;
 
 public class MapRenderer {
 	public static void drawHexMap(Game game, Graphics g, Point origin, int size, int radius, int padding, int oval) {

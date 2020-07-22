@@ -1,17 +1,16 @@
 package de.hexagonsoftware.colonies.game.states;
 
 import de.hexagonsoftware.colonies.engine.Engine;
-import de.hexagonsoftware.colonies.engine.graphics.*;
 import de.hexagonsoftware.colonies.engine.sound.Sound;
 import de.hexagonsoftware.colonies.game.Game;
 
-import javax.sound.sampled.Mixer;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 public class SplashScreenState implements IState {
     private Game game;
+    private Engine engine;
     private BufferedImage splash;
     private int counter;
     private int counter2;
@@ -19,10 +18,11 @@ public class SplashScreenState implements IState {
     private boolean soundPlayed = false;
     private boolean imageFinished = false;
     private boolean textFinished = false;
+    private boolean imageLoaded = false;
 
-    public SplashScreenState(Game game) {
+    public SplashScreenState(Game game, Engine engine) {
         this.game = game;
-        this.splash = ImageLoader.loadImage(getClass().getResource("/assets/img/splash.png"));
+        this.engine = engine;
         this.counter = 0;
         this.counter2 = 0;
         this.alpha = 0;
@@ -30,6 +30,9 @@ public class SplashScreenState implements IState {
 
     @Override
     public void render(Graphics g, int fps) {
+    	if (!imageLoaded)
+    		this.splash = engine.getResourceManager().getTexture("splash");
+    	
         g.setColor(Color.black);
         g.fillRect(0, 0, game.getWindow().getWidth(), game.getWindow().getHeight());
         int x = (game.getWindow().getWidth() - splash.getWidth(null)) / 2;
@@ -61,12 +64,13 @@ public class SplashScreenState implements IState {
         if (counter2 == 790) {
             textFinished = true;
         }
+        imageLoaded = true;
     }
 
     @Override
     public void update() {
         if (counter >= 10 && !soundPlayed) {
-            (new Sound(getClass().getResource("/assets/sound/misc/splash.wav"))).playSound();
+            engine.getResourceManager().getSound("hexagonIntro").playSound();
             this.soundPlayed = true;
         }
 

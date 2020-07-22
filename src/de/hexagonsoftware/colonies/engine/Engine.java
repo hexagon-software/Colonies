@@ -13,13 +13,17 @@ public class Engine {
 	// Engine Vars
 	private Game game;
 	private HexagonGraphicsEngine hge;
+	private ResourceManager resourceManager;
 	
 	public Engine(Game game, String title) {
+		Reference.logger.info("Initialising engine...");
 		this.game = game;
 		this.hge = new HexagonGraphicsEngine( new int[] {1920, 1080}, title, this);
+		this.resourceManager = new ResourceManager();
 	}
 	
 	public HexagonGraphicsEngine getHGE() { return this.hge; }
 	public GameWindow getWin() { return this.hge.getGameWindow(); }
 	public Game getGame() { return this.game; }
+	public ResourceManager getResourceManager() { return this.resourceManager; }
 }

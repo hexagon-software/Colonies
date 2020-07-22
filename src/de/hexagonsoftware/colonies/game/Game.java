@@ -9,12 +9,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import de.hexagonsoftware.colonies.Reference;
 import de.hexagonsoftware.colonies.engine.Engine;
 import de.hexagonsoftware.colonies.engine.graphics.GameWindow;
-import de.hexagonsoftware.colonies.engine.graphics.ImageLoader;
 import de.hexagonsoftware.colonies.game.tiles.*;
 import de.hexagonsoftware.colonies.game.util.PerlinNoise;
+import de.hexagonsoftware.colonies.game.util.ResourceLoader;
 import de.hexagonsoftware.colonies.game.util.Vector3;
 import de.hexagonsoftware.colonies.game.util.Vector3d;
-import de.hexagonsoftware.colonies.Logger;
 
 public class Game implements Runnable {
 	private Engine engine;
@@ -35,10 +34,13 @@ public class Game implements Runnable {
 		Reference.logger.info("Initialising Game...");
 		this.engine = new Engine(this, "Colonies "+Reference.VERSION);
 		this.window = engine.getWin();
-		this.stateMachine = new StateMachine(this);
+		this.stateMachine = new StateMachine(this, engine);
+		
+		Reference.logger.info("Loading Game Resources...");
+		ResourceLoader.loadResources(engine);
 		
 		// Set the Icon for the Game Window
-		window.getFrame().setIconImage(ImageLoader.loadImage(this.getClass().getResource("/assets/img/icon.png")));
+		window.getFrame().setIconImage(engine.getResourceManager().getTexture("icon"));
 		
 		Reference.logger.info("Generating Map...");
 		image = new BufferedImage(window.getWidth(), window.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -107,8 +109,6 @@ public class Game implements Runnable {
 	}
 	
 	private void generateMap() {
-		Logger logger = Logger.getLogger("MAPGEN");
-		
 		for (int x = 0; x < size; x++) {
 			for (int y = 0; y < size; y++) {
 				double dx = (double) x / window.getHeight();
@@ -119,8 +119,6 @@ public class Game implements Runnable {
     			int r = b * 0x10000;
     			int finalValue = r;
         		image.setRGB(x, y, finalValue);
-				
-				logger.info("Noise Value for Coordinates (X: "+x+" Y: "+y+"): "+String.valueOf(type));
 				
 				noiseMap.put(x+y, new Vector3d(x, y, type));
 			}

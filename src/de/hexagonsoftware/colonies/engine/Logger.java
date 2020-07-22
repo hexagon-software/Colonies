@@ -1,4 +1,4 @@
-package de.hexagonsoftware.colonies;
+package de.hexagonsoftware.colonies.engine;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -57,8 +57,8 @@ public class Logger {
 	
 	private void addLog(String msg) {
 		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(log, true));
-			out.write(msg+"\n");
+			BufferedWriter out = new BufferedWriter(new FileWriter(log, true)); 
+			out.write(msg+"\n"); 
 			out.close(); 
 		} catch (Exception e) {
 			e.printStackTrace();

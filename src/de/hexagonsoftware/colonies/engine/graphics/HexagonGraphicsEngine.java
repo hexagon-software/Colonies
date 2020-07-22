@@ -1,6 +1,7 @@
 package de.hexagonsoftware.colonies.engine.graphics;
 
 import de.hexagonsoftware.colonies.engine.Engine;
+import de.hexagonsoftware.colonies.engine.Reference;
 
 public class HexagonGraphicsEngine {
 	private int[] resolution;
@@ -9,9 +10,10 @@ public class HexagonGraphicsEngine {
 	private AnimationRegistry animationRegistry;
 	
 	public HexagonGraphicsEngine(int[] resolution, String title, Engine engine) {
+		Reference.logger.info("Initialising Graphics engine...");
 		this.resolution = resolution;
 		if (this.resolution == null) {
-			System.out.println("[WRN] HGE: WARNING: THE CLIENT DID NOT SPECIFY THE RESOLUTION; SETTING RESOLUTION TO 1024x512!");
+			Reference.logger.warn("THE CLIENT DID NOT SPECIFY THE RESOLUTION; SETTING RESOLUTION TO 1024x512!");
 			this.resolution = new int[] {1024, 512};
 		}
 		

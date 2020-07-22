@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import javax.imageio.ImageIO;
-
-import de.hexagonsoftware.colonies.Logger;
 import de.hexagonsoftware.colonies.Reference;
 
 public class ImageWriter {

@@ -7,6 +7,8 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+import de.hexagonsoftware.colonies.engine.Reference;
+
 public class ImageLoader {
 	
 	/**
@@ -21,18 +23,16 @@ public class ImageLoader {
 		BufferedImage img = null;
 		
 		if (path == null) {
-			try {
-				throw new FileNotFoundException();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
+			Reference.logger.error("The file \""+path+"\"");
+			return null;
 		}
 		
 		try {
 			img = ImageIO.read(path);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			Reference.logger.error("A critical error occured whilst trying to load the Image, details are listed below!");
 			e.printStackTrace();
+			return null;
 		}
 		
 		if (img != null) {
