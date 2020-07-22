@@ -7,7 +7,14 @@ public class Main {
 		System.out.println("Colonies v"+Reference.VERSION+" | Copyright (c) Hexagon Software\n");
 		Reference.logger.info("Starting...");
 		
+		boolean skipSplash = false;
+		
+		for (String s : args) {
+			if (s.matches("skipSplash"))
+				skipSplash = true;
+		}
+		
 		Game game = new Game();
-		game.start();
+		game.start(skipSplash);
 	}
 }

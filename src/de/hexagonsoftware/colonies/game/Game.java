@@ -1,7 +1,6 @@
 package de.hexagonsoftware.colonies.game;
 
 import java.awt.Graphics;
-import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,10 +10,7 @@ import de.hexagonsoftware.colonies.Reference;
 import de.hexagonsoftware.colonies.engine.Engine;
 import de.hexagonsoftware.colonies.engine.graphics.GameWindow;
 import de.hexagonsoftware.colonies.engine.graphics.ImageLoader;
-import de.hexagonsoftware.colonies.game.states.playing.MapRenderer;
-import de.hexagonsoftware.colonies.game.states.playing.StringRendering;
 import de.hexagonsoftware.colonies.game.tiles.*;
-import de.hexagonsoftware.colonies.game.util.ImageWriter;
 import de.hexagonsoftware.colonies.game.util.PerlinNoise;
 import de.hexagonsoftware.colonies.game.util.Vector3;
 import de.hexagonsoftware.colonies.game.util.Vector3d;
@@ -31,7 +27,6 @@ public class Game implements Runnable {
 	public int size = 7;
 	private Map<Integer, Vector3d> noiseMap;
 	private Vector3[] tileMap = new Vector3[size*size];
-	private double[] tileNoiseVals;
 	
 	private static double time = 0;
 	private static BufferedImage image;
@@ -52,16 +47,20 @@ public class Game implements Runnable {
 		translateMap();
 	}
 	
-	public void start() {
+	public void start(boolean skipSplash) {
 		this.t = new Thread(this, "COLONIES");
 		running = true;
+		Reference.logger.info("Init Finished, entering game!");
+		
+		this.stateMachine.activateState("playing");
+		if (!skipSplash)
+			this.stateMachine.activateState("splash");
+		
 		this.t.start();
 	}
 	
 	@Override
 	public void run() {
-		Reference.logger.info("Init Finished, entering game!");
-		this.stateMachine.activateState("splash");
 		
 		long oldTimestamp = System.nanoTime();
 		double ticks = 60.0;
@@ -108,7 +107,6 @@ public class Game implements Runnable {
 	}
 	
 	private void generateMap() {
-		int stone = 0, grass = 0;
 		Logger logger = Logger.getLogger("MAPGEN");
 		
 		for (int x = 0; x < size; x++) {
@@ -118,7 +116,6 @@ public class Game implements Runnable {
 				int frequency = ThreadLocalRandom.current().nextInt(10, 1000);
 				double type = PerlinNoise.noise((dx * frequency) + time, (dy * frequency) + time);
 				int b = (int)(type * 0xFF);
-    			int g = b * 0x100;
     			int r = b * 0x10000;
     			int finalValue = r;
         		image.setRGB(x, y, finalValue);
@@ -156,7 +153,6 @@ public class Game implements Runnable {
     			double noise = PerlinNoise.noise((dx * frequency) + time, (dy * frequency) + time);
     			noise = (noise - 1) / 2;
     			int b = (int)(noise * 0xFF);
-    			int g = b * 0x100;
     			int r = b * 0x10000;
     			int finalValue = r;
         		img.setRGB(x, y, finalValue);
