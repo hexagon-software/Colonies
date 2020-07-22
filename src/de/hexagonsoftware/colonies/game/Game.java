@@ -145,25 +145,6 @@ public class Game implements Runnable {
 		}
 	}
 	
-    public BufferedImage getNoiseImage(){
-    	BufferedImage img = new BufferedImage(window.getWidth(), window.getHeight(), BufferedImage.TYPE_INT_RGB);
-    	time += 0.01;
-    	for(int y = 0; y < window.getHeight(); y++){
-    		for(int x = 0; x < window.getWidth(); x++){
-    			double dx = (double) x / window.getHeight();
-    			double dy = (double) y / window.getWidth();
-    			int frequency = 6;
-    			double noise = PerlinNoise.noise((dx * frequency) + time, (dy * frequency) + time);
-    			noise = (noise - 1) / 2;
-    			int b = (int)(noise * 0xFF);
-    			int r = b * 0x10000;
-    			int finalValue = r;
-        		img.setRGB(x, y, finalValue);
-        	}
-    	}
-    	return img;
-    }
-	
 	public GameWindow getWindow() { return this.window; }
 	public Vector3[] getMap() { return this.tileMap; }
 

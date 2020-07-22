@@ -1,5 +1,7 @@
 package de.hexagonsoftware.colonies.game.util;
 
+import java.awt.image.BufferedImage;
+
 public final class PerlinNoise {
 	public static double noise(double x, double y){
     	int xi = (int) Math.floor(x) & 255;
@@ -31,6 +33,25 @@ public final class PerlinNoise {
     private static double lerp(double amount, double left, double right) {
 		return ((1 - amount) * left + amount * right);
 	}
+    
+    public static BufferedImage getNoiseImage(int width, int height){
+    	BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+    	double time = 0.01;
+    	for(int y = 0; y < height; y++){
+    		for(int x = 0; x < width; x++){
+    			double dx = (double) x / height;
+    			double dy = (double) y / width;
+    			int frequency = 6;
+    			double noise = PerlinNoise.noise((dx * frequency) + time, (dy * frequency) + time);
+    			noise = (noise - 1) / 2;
+    			int b = (int)(noise * 0xFF);
+    			int r = b * 0x10000;
+    			int finalValue = r;
+        		img.setRGB(x, y, finalValue);
+        	}
+    	}
+    	return img;
+    }
     
     private static double fade(double t) { 
     	return t * t * t * (t * (t * 6 - 15) + 10); 
