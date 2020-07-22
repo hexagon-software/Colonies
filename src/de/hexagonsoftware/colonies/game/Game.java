@@ -1,6 +1,7 @@
 package de.hexagonsoftware.colonies.game;
 
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import de.hexagonsoftware.colonies.Reference;
 import de.hexagonsoftware.colonies.engine.Engine;
 import de.hexagonsoftware.colonies.engine.graphics.GameWindow;
+import de.hexagonsoftware.colonies.game.input.MouseInput;
 import de.hexagonsoftware.colonies.game.tiles.*;
 import de.hexagonsoftware.colonies.game.util.PerlinNoise;
 import de.hexagonsoftware.colonies.game.util.ResourceLoader;
@@ -35,6 +37,9 @@ public class Game implements Runnable {
 		this.engine = new Engine(this, "Colonies "+Reference.VERSION);
 		this.window = engine.getWin();
 		this.stateMachine = new StateMachine(this, engine);
+		
+		Reference.logger.info("Initialising Input Handlers...");
+		this.window.addMouseListener(new MouseInput(this));
 		
 		Reference.logger.info("Loading Game Resources...");
 		ResourceLoader.loadResources(engine);
@@ -164,5 +169,9 @@ public class Game implements Runnable {
 
 	public StateMachine getStateMachine() {
 		return stateMachine;
+	}
+
+	public void handleMouse(MouseEvent e) {
+		stateMachine.getActiveState().mousePressed(e.getX(), e.getY());
 	}
 }

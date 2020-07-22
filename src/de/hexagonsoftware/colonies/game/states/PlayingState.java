@@ -29,7 +29,7 @@ public class PlayingState implements IState {
 
 	@Override
 	public void mousePressed(int x, int y) {
-		
+		System.out.println(x);
 	}
 
 	@Override
