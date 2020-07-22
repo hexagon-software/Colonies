@@ -2,6 +2,11 @@ package de.hexagonsoftware.colonies.game.util;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * PerlinNoise generator used for Map Generation.
+ * 
+ * @author Felix Eckert
+ * */
 public final class PerlinNoise {
 	public static double noise(double x, double y){
     	int xi = (int) Math.floor(x) & 255;
