@@ -11,6 +11,19 @@ import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+/**
+ * Hexagon Engine Sound Object
+ * 
+ * This class creates a sound clip from the given input URL,
+ * this clip can then be played back, stopped and get its volume changed
+ * (even whilst playing).
+ * It also contains some function to get some info about the current state of
+ * the clip.
+ * 
+ * This class is part of the Hexagon Engine!
+ * 
+ * @author Felix Eckert
+ * */
 public class Sound {
     private AudioInputStream stream;
     private Clip clip;
@@ -46,6 +59,7 @@ public class Sound {
 		this.clip.close();
 	}
 
+	// The double it returns is kinda strange...
 	public double getTimeInSeconds() {
 		return TimeUnit.MICROSECONDS.convert(clip.getMicrosecondPosition(), TimeUnit.SECONDS);
 	}
