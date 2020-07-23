@@ -17,7 +17,7 @@ public class HexagonGraphicsEngine {
 			this.resolution = new int[] {1024, 512};
 		}
 		
-		this.gameWindow = new GameWindow(resolution, title);
+		this.gameWindow = new GameWindow(resolution, title, engine.getFullscreen());
 		this.animationRegistry = new AnimationRegistry();
 		this.renderer = new MainRenderer(engine, gameWindow);
 	}

@@ -34,9 +34,9 @@ public class Game implements Runnable {
 	private static double time = 0;
 	private static BufferedImage image;
 	
-	public Game() {
+	public Game(boolean fullscreen) {
 		Reference.logger.info("Initialising Game...");
-		this.engine = new Engine(this, "Colonies "+Reference.VERSION); // Create new Game Engine instance
+		this.engine = new Engine(this, "Colonies "+Reference.VERSION, fullscreen); // Create new Game Engine instance
 		this.window = engine.getWin(); // Get the GameWindow instance for convenience
 		this.stateMachine = new StateMachine(this, engine); // Create a new State Machine
 		

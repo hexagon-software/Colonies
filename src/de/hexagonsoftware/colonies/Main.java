@@ -9,13 +9,17 @@ public class Main {
 		Reference.logger.info("Starting...");
 		
 		boolean skipSplash = false;
+		boolean fullscreen = false;
 		
 		for (String s : args) {
 			if (s.matches("skipSplash"))
 				skipSplash = true;
+			
+			if (s.matches("fullscreen"))
+				fullscreen = true;
 		}
 		
-		Game game = new Game();
+		Game game = new Game(fullscreen);
 		game.start(skipSplash);
 	}
 }

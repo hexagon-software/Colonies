@@ -40,6 +40,5 @@ public class PlayingState implements IState {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		
-	}
-
+	} 
 }
