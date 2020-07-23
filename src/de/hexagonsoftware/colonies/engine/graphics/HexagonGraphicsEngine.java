@@ -12,12 +12,14 @@ public class HexagonGraphicsEngine {
 	public HexagonGraphicsEngine(int[] resolution, String title, Engine engine) {
 		Reference.logger.info("Initialising Graphics engine...");
 		this.resolution = resolution;
+		
+		// If there was no resolution specified, revert back to a default res.
 		if (this.resolution == null) {
 			Reference.logger.warn("THE CLIENT DID NOT SPECIFY THE RESOLUTION; SETTING RESOLUTION TO 1024x512!");
-			this.resolution = new int[] {1024, 512};
+			this.resolution = new int[] {1920, 1040};
 		}
 		
-		this.gameWindow = new GameWindow(resolution, title, engine.getFullscreen());
+		this.gameWindow = new GameWindow(this.resolution, title, engine.getFullscreen());
 		this.animationRegistry = new AnimationRegistry();
 		this.renderer = new MainRenderer(engine, gameWindow);
 	}

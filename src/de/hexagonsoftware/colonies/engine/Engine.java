@@ -30,7 +30,7 @@ public class Engine {
 		Reference.logger.info("Initialising engine...");
 		this.fullscreen = fullscreen;
 		this.game = game;
-		this.hge = new HexagonGraphicsEngine( new int[] {1920, 1080}, title, this); // Create a new Graphics Engine
+		this.hge = new HexagonGraphicsEngine(new int[] {1920, 1080}, title, this); // Create a new Graphics Engine
 		this.resourceManager = new ResourceManager(); // Create a new Resource Manager, responsible for storing and creating
 													  // New resources.
 	}
