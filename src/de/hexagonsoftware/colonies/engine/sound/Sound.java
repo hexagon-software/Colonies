@@ -2,6 +2,7 @@ package de.hexagonsoftware.colonies.engine.sound;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -45,6 +46,14 @@ public class Sound {
 		this.clip.close();
 	}
 
+	public double getTimeInSeconds() {
+		return TimeUnit.MICROSECONDS.convert(clip.getMicrosecondPosition(), TimeUnit.SECONDS);
+	}
+
+	public boolean isOpen() {
+		return clip.isOpen();
+	}
+	
     /**
      * Can be used to set the Volume of the Sound. Doesnt work whilst sound is playing.
      * @param volume Volume of the Sound.
