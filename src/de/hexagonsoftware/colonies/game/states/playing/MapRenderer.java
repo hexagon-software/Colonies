@@ -66,7 +66,7 @@ public class MapRenderer {
         int feldX = x- (int)g.getFontMetrics().getStringBounds(String.valueOf(tileNo), g).getWidth()/2;
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         g2d.setFont(new Font("Courier New", Font.ITALIC, 18));
-        g2d.drawString(String.valueOf(tileNo), x, y);
+        g2d.drawString(String.valueOf(tileNo), feldX, y);
 	}
 
 }

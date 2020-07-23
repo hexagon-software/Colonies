@@ -1,6 +1,5 @@
 package de.hexagonsoftware.colonies.engine.graphics;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 

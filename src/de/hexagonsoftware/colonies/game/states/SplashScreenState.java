@@ -2,7 +2,6 @@ package de.hexagonsoftware.colonies.game.states;
 
 import de.hexagonsoftware.colonies.engine.Engine;
 import de.hexagonsoftware.colonies.engine.graphics.StringRenderer;
-import de.hexagonsoftware.colonies.engine.sound.Sound;
 import de.hexagonsoftware.colonies.game.Game;
 
 import java.awt.*;
@@ -15,7 +14,6 @@ public class SplashScreenState implements IState {
     private BufferedImage splash;
     private int counter;
     private int counter2;
-    private double alpha;
     private boolean soundPlayed = false;
     private boolean imageFinished = false;
     private boolean textFinished = false;
@@ -26,7 +24,6 @@ public class SplashScreenState implements IState {
         this.engine = engine;
         this.counter = 0;
         this.counter2 = 0;
-        this.alpha = 0;
     }
 
     @Override
@@ -106,7 +103,5 @@ public class SplashScreenState implements IState {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 }

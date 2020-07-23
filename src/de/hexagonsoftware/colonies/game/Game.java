@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
@@ -33,7 +32,6 @@ public class Game implements Runnable {
 	private Vector3[] tileMap = new Vector3[size*size];
 	
 	private static double time = 0;
-	private static BufferedImage image;
 	
 	public Game(boolean fullscreen) {
 		Reference.logger.info("Initialising Game...");
@@ -134,9 +132,6 @@ public class Game implements Runnable {
 				double dy = (double) y / window.getWidth();
 				int frequency = ThreadLocalRandom.current().nextInt(10, 1000);
 				double type = PerlinNoise.noise((dx * frequency) + time, (dy * frequency) + time);
-				int b = (int)(type * 0xFF);
-    			int r = b * 0x10000;
-    			int finalValue = r;
 				
 				noiseMap.put(x+y, new Vector3d(x, y, type));
 			}

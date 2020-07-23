@@ -1,8 +1,5 @@
 package de.hexagonsoftware.colonies.engine;
 
-import java.awt.image.BufferedImage;
-
-import de.hexagonsoftware.colonies.engine.graphics.ImageLoader;
 import de.hexagonsoftware.colonies.engine.sound.Sound;
 
 public class SoundResource implements IGameResource {

@@ -5,6 +5,7 @@ import java.awt.Canvas;
 import javax.swing.JFrame;
 
 public class GameWindow extends Canvas {
+	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	
 	public GameWindow(int[] res, String title, boolean fullscreen) {

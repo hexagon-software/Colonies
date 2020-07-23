@@ -11,7 +11,6 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Sound {
-    private URL url;
     private AudioInputStream stream;
     private Clip clip;
 
@@ -20,8 +19,6 @@ public class Sound {
      * @author Felix Eckert
      * */
     public Sound(URL url) {
-        this.url = url;
-
         try {
             this.stream = AudioSystem.getAudioInputStream(url);
             this.clip = AudioSystem.getClip();

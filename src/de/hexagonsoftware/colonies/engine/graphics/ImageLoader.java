@@ -1,7 +1,6 @@
 package de.hexagonsoftware.colonies.engine.graphics;
 
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 
