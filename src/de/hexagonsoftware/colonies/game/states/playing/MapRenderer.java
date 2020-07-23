@@ -7,10 +7,13 @@ import java.awt.Point;
 
 import de.hexagonsoftware.colonies.engine.graphics.polys.Hexagon;
 import de.hexagonsoftware.colonies.game.Game;
+import de.hexagonsoftware.colonies.game.states.PlayingState;
 import de.hexagonsoftware.colonies.game.tiles.ITile;
 
 public class MapRenderer {
 	public static void drawHexMap(Game game, Graphics g, Point origin, int size, int radius, int padding, int oval) {
+		((PlayingState) game.getStateMachine().getActiveState()).clearHexMap();
+		((PlayingState) game.getStateMachine().getActiveState()).clearTileMap();
         double ang30 = Math.toRadians(30);
         double xOff = Math.cos(ang30) * (radius + padding);
         double yOff = Math.sin(ang30) * (radius + padding);
@@ -33,18 +36,25 @@ public class MapRenderer {
                 int y = (int) (origin.y + yOff * (row - half) * 3);
                 
                 int color = (int) ((ITile) game.getMap()[row+col].z).getColor();
-                	
-                drawHex(g, xLbl, yLbl, x, y, radius, color); 
+                ITile tile = (ITile) game.getMap()[row+col].z;
+                tile.setX(x);
+                tile.setY(y);
+                
+                drawHex(g, xLbl, yLbl, x, y, radius, color, game, tile); 
+                
                 c++;
             }
             c++;
         }
 	}
 	
-	public static void drawHex(Graphics g, int posX, int posY, int x, int y, int r, int color) {
+	public static void drawHex(Graphics g, int posX, int posY, int x, int y, int r, int color, Game game, ITile tile) {
 		Graphics2D g2d = (Graphics2D) g;
 
         Hexagon hex = new Hexagon(x, y, r);
+        
+       ((PlayingState) game.getStateMachine().getActiveState()).addHexagon(hex);
+       ((PlayingState) game.getStateMachine().getActiveState()).addTile(tile);
         
         hex.draw(g2d, x, y, 0, color, true);
         hex.draw(g2d, x, y, 2, 0x000000, false);
