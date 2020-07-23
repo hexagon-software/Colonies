@@ -10,6 +10,7 @@ import java.util.List;
 
 import de.hexagonsoftware.colonies.engine.graphics.polys.Hexagon;
 import de.hexagonsoftware.colonies.game.Game;
+import de.hexagonsoftware.colonies.game.states.playing.ChoiceMenuRender;
 import de.hexagonsoftware.colonies.game.states.playing.MapRenderer;
 import de.hexagonsoftware.colonies.game.states.playing.StringRendering;
 import de.hexagonsoftware.colonies.game.tiles.ITile;
@@ -25,6 +26,9 @@ public class PlayingState implements IState {
 	private List<Hexagon> hexList;
 	private List<ITile> tiles;
 	
+	private boolean buildingChoiceActive = false;
+	private String[] choices;
+	
 	public PlayingState(Game game) {
 		this.game = game;
 		this.hexList = new ArrayList<>();
@@ -36,11 +40,14 @@ public class PlayingState implements IState {
 		Point origin = new Point(game.getWindow().getWidth()/2, game.getWindow().getHeight()/2);
 		MapRenderer.drawHexMap(game, g, origin, game.size, 50, 0, 50*game.size/8);
 		StringRendering.render(g, game.getWindow().getWidth(), game.getWindow().getHeight(), fps);
+		if (buildingChoiceActive)
+			ChoiceMenuRender.render(g, game.getWindow().getWidth(), game.getWindow().getHeight(), choices);
 	}
 
 	@Override
 	public void update() {
-		
+		if (buildingChoiceActive) {
+		}
 	}
 
 	@Override
@@ -51,7 +58,7 @@ public class PlayingState implements IState {
 		try {
 			for (int i = 0; i < hexList.size(); i++) {
 				if (hexList.get(i).intersects(r))
-					tiles.get(i).setBuilding(null);
+					buildingChoiceActive = true;
 			}
 		} catch (ConcurrentModificationException e) {
 			return;

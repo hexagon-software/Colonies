@@ -1,9 +1,11 @@
 package de.hexagonsoftware.colonies.game.states.playing;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.RenderingHints;
 
 import de.hexagonsoftware.colonies.engine.graphics.polys.Hexagon;
 import de.hexagonsoftware.colonies.game.Game;
@@ -11,6 +13,8 @@ import de.hexagonsoftware.colonies.game.states.PlayingState;
 import de.hexagonsoftware.colonies.game.tiles.ITile;
 
 public class MapRenderer {
+	private static int tileNo = 0;
+	
 	public static void drawHexMap(Game game, Graphics g, Point origin, int size, int radius, int padding, int oval) {
 		((PlayingState) game.getStateMachine().getActiveState()).clearHexMap();
 		((PlayingState) game.getStateMachine().getActiveState()).clearTileMap();
@@ -21,7 +25,6 @@ public class MapRenderer {
         
         int scale = 15;
         int ovalColor = 0x2980b9;
-        int c = 0;
         
         g.setColor(new Color(ovalColor));
         g.fillOval((game.getWindow().getWidth() / 2)-((oval*scale)/2), 
@@ -41,14 +44,14 @@ public class MapRenderer {
                 tile.setY(y);
                 
                 drawHex(g, xLbl, yLbl, x, y, radius, color, game, tile); 
-                
-                c++;
             }
-            c++;
         }
+        
+        tileNo = 0;
 	}
 	
 	public static void drawHex(Graphics g, int posX, int posY, int x, int y, int r, int color, Game game, ITile tile) {
+		tileNo++;
 		Graphics2D g2d = (Graphics2D) g;
 
         Hexagon hex = new Hexagon(x, y, r);
@@ -58,6 +61,12 @@ public class MapRenderer {
         
         hex.draw(g2d, x, y, 0, color, true);
         hex.draw(g2d, x, y, 2, 0x000000, false);
+        
+        g2d.setColor(Color.BLACK);
+        int feldX = x- (int)g.getFontMetrics().getStringBounds(String.valueOf(tileNo), g).getWidth()/2;
+        g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2d.setFont(new Font("Courier New", Font.ITALIC, 18));
+        g2d.drawString(String.valueOf(tileNo), x, y);
 	}
 
 }

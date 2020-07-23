@@ -1,6 +1,7 @@
 package de.hexagonsoftware.colonies.game.states;
 
 import de.hexagonsoftware.colonies.engine.Engine;
+import de.hexagonsoftware.colonies.engine.graphics.StringRenderer;
 import de.hexagonsoftware.colonies.engine.sound.Sound;
 import de.hexagonsoftware.colonies.game.Game;
 
@@ -33,7 +34,7 @@ public class SplashScreenState implements IState {
     	if (!imageLoaded)
     		this.splash = engine.getResourceManager().getTexture("splash");
     	
-        g.setColor(Color.black);
+        g.setColor(Color.BLACK);
         g.fillRect(0, 0, game.getWindow().getWidth(), game.getWindow().getHeight());
         int x = (game.getWindow().getWidth() - splash.getWidth(null)) / 2;
         int y = (game.getWindow().getHeight() - splash.getHeight(null)) / 2;
@@ -59,6 +60,18 @@ public class SplashScreenState implements IState {
             		1, g2d.getFontMetrics().getHeight());
             g2d.drawString("HEXAGON ENGINE V"+Engine.VERSION+" COPYRIGHT (C) 2020 HEXAGON SOFTWARE.", 
             		1, g2d.getFontMetrics().getHeight()*2);
+            
+            String[] strings = new String[] {
+            		"Powered by HEGE",
+            		"(C) 2020 HEXAGON SOFTWARE. The Hexagon Engine alongside Colonies lie under the 3-Clause BSD License.",
+            		"The license file can be found at https://t1p.de/0fs8 (Github Redirect).",
+            		"The Hexagon Software Logo belongs to Hexagon Software and may not be claimed as your own!"
+            };
+            
+            g2d.setFont(new Font("Calibri", Font.BOLD, 50));
+            
+            for (int i = 0; i < strings.length; i++)
+            	StringRenderer.drawString(g2d, strings[i], y*4+(g2d.getFontMetrics().getHeight()*(i+1)), game.getWindow().getWidth(), StringRenderer.CENTER);
         }
 
         if (counter2 == 790) {

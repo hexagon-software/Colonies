@@ -1,5 +1,6 @@
 package de.hexagonsoftware.colonies.game;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -39,6 +40,7 @@ public class Game implements Runnable {
 		this.engine = new Engine(this, "Colonies "+Reference.VERSION, fullscreen); // Create new Game Engine instance
 		this.window = engine.getWin(); // Get the GameWindow instance for convenience
 		this.stateMachine = new StateMachine(this, engine); // Create a new State Machine
+		this.window.setBackground(Color.white); // Set the Canvas Background Color
 		
 		Reference.logger.info("Initialising Input Handlers...");
 		this.window.addMouseListener(new MouseInput(this)); // Add Mouse Input handler
