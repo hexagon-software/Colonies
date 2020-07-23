@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
+import de.hexagonsoftware.colonies.engine.Reference;
 import de.hexagonsoftware.colonies.engine.graphics.polys.Hexagon;
 import de.hexagonsoftware.colonies.game.Game;
 import de.hexagonsoftware.colonies.game.states.playing.ChoiceMenuRender;
@@ -27,7 +28,7 @@ public class PlayingState implements IState {
 	private List<ITile> tiles;
 	
 	private boolean buildingChoiceActive = false;
-	private ITile buildingTile;
+	private int buildingTile;
 	private String[] choices;
 	
 	public PlayingState(Game game) {
@@ -48,7 +49,7 @@ public class PlayingState implements IState {
 	@Override
 	public void update() {
 		if (buildingChoiceActive) {
-			choices = buildingTile.getPossibleBuildings();
+			choices = tiles.get(buildingTile).getPossibleBuildings();
 		}
 	}
 
@@ -61,7 +62,7 @@ public class PlayingState implements IState {
 			for (int i = 0; i < hexList.size(); i++) {
 				if (hexList.get(i).intersects(r)) {
 					buildingChoiceActive = true;
-					buildingTile = tiles.get(i);
+					buildingTile = i;
 				}
 			}
 		} catch (ConcurrentModificationException e) {
@@ -71,10 +72,27 @@ public class PlayingState implements IState {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		char keyChar = e.getKeyChar();	
+		
 		// If Escape was pressed, close any menu
 		if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
 			buildingChoiceActive = false;
 			choices = null;
+		}
+		
+		// Buildin Choice Handling
+		if (buildingChoiceActive && Character.isDigit(keyChar)) {
+			if (tiles.get(buildingTile) != null && buildingTile != -1) {
+				int choice = Integer.parseInt(String.valueOf(keyChar));
+				
+				// Check if choice is possible
+				if (choices.length < choice+1)
+					return; // Return if not
+					
+				tiles.get(buildingTile).createBuilding(choice); // Tell the Tile to create the building of the given ID (choice)
+				buildingChoiceActive = false; // Deactivate the choice menu
+				buildingTile = -1; // Set the building tile back to -1
+			}
 		}
 	}
 

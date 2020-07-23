@@ -3,6 +3,8 @@ package de.hexagonsoftware.colonies.game.tiles;
 import de.hexagonsoftware.colonies.game.buildings.IBuilding;
 
 public class GrassTile implements ITile {
+	private IBuilding build;
+	
 	@Override
 	public int getColor() {
 		return 0x2ecc71;
@@ -27,14 +29,23 @@ public class GrassTile implements ITile {
 
 	@Override
 	public void setBuilding(IBuilding build) {
-
+		this.build = build;
 	}
+	
+	@Override
+	public IBuilding getBuilding() { return this.build; }
 
 	@Override
 	public String[] getPossibleBuildings() {
 		return new String[] {
-				"Settlement"
+				"Settlement",
+				"Sawmill"
 		};
+	}
+
+	@Override
+	public void createBuilding(int parseInt) {
+		
 	}
 	
 }
