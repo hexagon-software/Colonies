@@ -30,4 +30,11 @@ public class StoneTile implements ITile {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public String[] getPossibleBuildings() {
+		return new String[] {
+				"Quarry"
+		};
+	}
 }

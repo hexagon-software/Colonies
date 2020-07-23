@@ -27,6 +27,7 @@ public class PlayingState implements IState {
 	private List<ITile> tiles;
 	
 	private boolean buildingChoiceActive = false;
+	private ITile buildingTile;
 	private String[] choices;
 	
 	public PlayingState(Game game) {
@@ -47,6 +48,7 @@ public class PlayingState implements IState {
 	@Override
 	public void update() {
 		if (buildingChoiceActive) {
+			choices = buildingTile.getPossibleBuildings();
 		}
 	}
 
@@ -57,8 +59,10 @@ public class PlayingState implements IState {
 		// Go through the hexList and check if the player clicked any hexagon
 		try {
 			for (int i = 0; i < hexList.size(); i++) {
-				if (hexList.get(i).intersects(r))
+				if (hexList.get(i).intersects(r)) {
 					buildingChoiceActive = true;
+					buildingTile = tiles.get(i);
+				}
 			}
 		} catch (ConcurrentModificationException e) {
 			return;
@@ -66,7 +70,13 @@ public class PlayingState implements IState {
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {}
+	public void keyPressed(KeyEvent e) {
+		// If Escape was pressed, close any menu
+		if (e.getKeyChar() == KeyEvent.VK_ESCAPE) {
+			buildingChoiceActive = false;
+			choices = null;
+		}
+	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {}

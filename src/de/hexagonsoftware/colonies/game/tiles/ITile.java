@@ -8,4 +8,5 @@ public interface ITile {
 	void setX(int x);
 	void setY(int y);
 	void setBuilding(IBuilding build);
+	String[] getPossibleBuildings();
 }

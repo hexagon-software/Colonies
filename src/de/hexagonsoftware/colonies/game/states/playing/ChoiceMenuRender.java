@@ -18,8 +18,15 @@ public class ChoiceMenuRender {
 		
 		// Initialise the Box in Which the Choices are Displayed
 		g2d.setColor(new Color(0xecf0f1));
-		g2d.fillRect(100, height-200, width-200, 200);
+		g2d.fillRect(100, height-200, width/4, 300);
 		g2d.setColor(Color.black);
-		g2d.drawRect(100, height-200, width-200, 200);
+		g2d.drawRect(100, height-200, width/4, 300);
+		
+		// Draw the Options
+		g2d.drawString("[ESC] Exit", 110, height-(200-(g.getFontMetrics().getHeight())));
+		for (int i = 0; i < choices.length; i++) {
+			g2d.drawString(i+": "+choices[i], 110,
+					height-(200-(g.getFontMetrics().getHeight()*(i+2))));
+		}
 	}
 }

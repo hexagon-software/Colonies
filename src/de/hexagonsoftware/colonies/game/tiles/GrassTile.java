@@ -29,5 +29,12 @@ public class GrassTile implements ITile {
 	public void setBuilding(IBuilding build) {
 
 	}
+
+	@Override
+	public String[] getPossibleBuildings() {
+		return new String[] {
+				"Settlement"
+		};
+	}
 	
 }
