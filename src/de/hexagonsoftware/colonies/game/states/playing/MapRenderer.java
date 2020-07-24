@@ -62,6 +62,9 @@ public class MapRenderer {
         hex.draw(g2d, x, y, 0, color, true);
         hex.draw(g2d, x, y, 2, 0x000000, false);
         
+        if (tile.getBuilding() != null)
+        	g2d.drawImage(tile.getBuilding().getTexture(), x, y, 32, 32, null);
+        	
         g2d.setColor(Color.BLACK);
         int feldX = x- (int)g.getFontMetrics().getStringBounds(String.valueOf(tileNo), g).getWidth()/2;
         g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);

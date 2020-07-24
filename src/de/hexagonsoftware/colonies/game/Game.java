@@ -149,7 +149,7 @@ public class Game implements Runnable {
 			double y = tile.y;
 			
 			if (noise < NoiseVals.getValues()[0]) {
-				tileMap[i] = new Vector3(x, y, new GrassTile());
+				tileMap[i] = new Vector3(x, y, new GrassTile(this));
 			} else {
 				tileMap[i] = new Vector3(x, y, new StoneTile());
 			}
@@ -158,7 +158,8 @@ public class Game implements Runnable {
 	
 	public GameWindow getWindow() { return this.window; }
 	public Vector3[] getMap() { return this.tileMap; }
-
+	public Engine getEngine() { return this.engine; }
+	
 	public StateMachine getStateMachine() {
 		return stateMachine;
 	}
