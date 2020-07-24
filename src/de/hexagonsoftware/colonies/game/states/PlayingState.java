@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
-import de.hexagonsoftware.colonies.engine.Reference;
 import de.hexagonsoftware.colonies.engine.graphics.polys.Hexagon;
 import de.hexagonsoftware.colonies.game.Game;
 import de.hexagonsoftware.colonies.game.states.playing.ChoiceMenuRender;
@@ -55,6 +54,8 @@ public class PlayingState implements IState {
 		}
 		
 		// Building Choice Highlight activation
+		// The highlight for some reason renders also for non highlighted tiles.
+		// Please help me
 		if (buildingChoiceActive && buildingTile != -1) {
 			tiles.get(buildingTile).setHighlited(true);
 			
