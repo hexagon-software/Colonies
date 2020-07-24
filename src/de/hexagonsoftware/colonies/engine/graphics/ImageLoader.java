@@ -22,7 +22,7 @@ public class ImageLoader {
 		BufferedImage img = null;
 		
 		if (path == null) {
-			Reference.logger.error("The file \""+path+"\"");
+			Reference.logger.error("The file \""+path+"\" could not be found!");
 			return null;
 		}
 		

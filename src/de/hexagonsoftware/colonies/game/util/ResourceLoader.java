@@ -20,10 +20,10 @@ public class ResourceLoader {
 		rm.addTexture("icon", "/assets/img/icon.png");
 		
 		// Leave these commented until some images for them are added to the assets
-		// rm.addTexture("settlement", "/assets/img/buildings/settlement.png");
-		// rm.addTexture("sawmill", "/assets/img/buildings/sawmill.png");
-		// rm.addTexture("quarry", "/assets/img/buildings/quarry.png");
-		// rm.addTexture("ironmine", "/assets/img/buildings/ironmine.png");
+		rm.addTexture("settlement", "/assets/img/buildings/settlement.png");
+		rm.addTexture("sawmill", "/assets/img/buildings/sawmill.png");
+		rm.addTexture("quarry", "/assets/img/buildings/quarry.png");
+		rm.addTexture("ironmine", "/assets/img/buildings/iron_mine.png");
 		// rm.addTexture("goldmine", "/assets/img/buildings/goldmine.png");
 	}
 	
