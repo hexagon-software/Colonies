@@ -29,12 +29,14 @@ public class PlayingState implements IState {
 	
 	private boolean buildingChoiceActive = false;
 	private int buildingTile;
+	private int prevBuildingTile;
 	private String[] choices;
 	
 	public PlayingState(Game game) {
 		this.game = game;
 		this.hexList = new ArrayList<>();
 		this.tiles = new ArrayList<>();
+		this.prevBuildingTile = -1;
 	}
 	
 	@Override
@@ -51,6 +53,15 @@ public class PlayingState implements IState {
 		if (buildingChoiceActive) {
 			choices = tiles.get(buildingTile).getPossibleBuildings();
 		}
+		
+		// Building Choice Highlight activation
+		if (buildingChoiceActive && buildingTile != -1) {
+			tiles.get(buildingTile).setHighlited(true);
+			
+			if (prevBuildingTile != -1) {
+				tiles.get(prevBuildingTile).setHighlited(false);
+			}
+		}
 	}
 
 	@Override
@@ -62,6 +73,7 @@ public class PlayingState implements IState {
 			for (int i = 0; i < hexList.size(); i++) {
 				if (hexList.get(i).intersects(r)) {
 					buildingChoiceActive = true;
+					prevBuildingTile = buildingTile;
 					buildingTile = i;
 				}
 			}
@@ -80,8 +92,11 @@ public class PlayingState implements IState {
 			choices = null;
 		}
 		
-		// Buildin Choice Handling
+		// Building Choice Handling
 		if (buildingChoiceActive && Character.isDigit(keyChar)) {
+			if (tiles.size() < buildingTile+1)
+				return;
+			
 			if (tiles.get(buildingTile) != null && buildingTile != -1) {
 				int choice = Integer.parseInt(String.valueOf(keyChar));
 				
@@ -91,6 +106,8 @@ public class PlayingState implements IState {
 					
 				tiles.get(buildingTile).createBuilding(choice); // Tell the Tile to create the building of the given ID (choice)
 				buildingChoiceActive = false; // Deactivate the choice menu
+				tiles.get(buildingTile).setHighlited(false);
+				prevBuildingTile = buildingTile;
 				buildingTile = -1; // Set the building tile back to -1
 			}
 		}

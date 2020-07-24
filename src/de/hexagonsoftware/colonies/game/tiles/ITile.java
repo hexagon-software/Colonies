@@ -11,4 +11,5 @@ public interface ITile {
 	IBuilding getBuilding();
 	String[] getPossibleBuildings();
 	void createBuilding(int parseInt);
+	void setHighlited(boolean b);
 }

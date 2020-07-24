@@ -4,9 +4,13 @@ import de.hexagonsoftware.colonies.game.buildings.IBuilding;
 
 public class GrassTile implements ITile {
 	private IBuilding build;
+	private boolean highlited = false;
 	
 	@Override
 	public int getColor() {
+		if (highlited)
+			return 0xe74c3c;
+		
 		return 0x2ecc71;
 	}
 
@@ -48,4 +52,6 @@ public class GrassTile implements ITile {
 		
 	}
 	
+	@Override
+	public void setHighlited(boolean b) { this.highlited = b; }
 }

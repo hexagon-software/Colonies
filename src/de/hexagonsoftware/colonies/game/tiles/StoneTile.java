@@ -4,9 +4,13 @@ import de.hexagonsoftware.colonies.game.buildings.IBuilding;
 
 public class StoneTile implements ITile {
 	private IBuilding build;
+	private boolean highlited = false;
 	
 	@Override
 	public int getColor() {
+		if (highlited)
+			return 0xe74c3c;
+		
 		return 0x7f8c8d;
 	}
 
@@ -49,4 +53,7 @@ public class StoneTile implements ITile {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void setHighlited(boolean b) { this.highlited = b; }
 }
