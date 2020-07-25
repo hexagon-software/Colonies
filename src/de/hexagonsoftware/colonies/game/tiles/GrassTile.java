@@ -63,5 +63,10 @@ public class GrassTile implements ITile {
 	}
 	
 	@Override
-	public void setHighlited(boolean b) { this.highlited = b; }
+	public void setHighlighted(boolean b) { this.highlited = b; }
+
+	@Override
+	public boolean hightlightActive() {
+		return this.highlited;
+	}	
 }

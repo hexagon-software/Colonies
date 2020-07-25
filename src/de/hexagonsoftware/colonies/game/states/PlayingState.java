@@ -56,13 +56,9 @@ public class PlayingState implements IState {
 		// Building Choice Highlight activation
 		// The highlight for some reason renders also for non highlighted tiles.
 		// Please help me
-		if (buildingChoiceActive && buildingTile != -1) {
-			tiles.get(buildingTile).setHighlited(true);
-			
-			if (prevBuildingTile != -1) {
-				tiles.get(prevBuildingTile).setHighlited(false);
-			}
-		}
+		//if (buildingChoiceActive && buildingTile != -1) {
+		//	tiles.get(buildingTile).setHighlighted(true);
+		//}
 	}
 
 	@Override
@@ -74,8 +70,12 @@ public class PlayingState implements IState {
 			for (int i = 0; i < hexList.size(); i++) {
 				if (hexList.get(i).intersects(r)) {
 					buildingChoiceActive = true;
-					prevBuildingTile = buildingTile;
 					buildingTile = i;
+					tiles.get(i).setHighlighted(true);
+				} else {
+					if (tiles.get(i).hightlightActive()) {
+						tiles.get(i).setHighlighted(false);
+					}
 				}
 			}
 		} catch (ConcurrentModificationException e) {
@@ -107,7 +107,7 @@ public class PlayingState implements IState {
 					
 				tiles.get(buildingTile).createBuilding(choice); // Tell the Tile to create the building of the given ID (choice)
 				buildingChoiceActive = false; // Deactivate the choice menu
-				tiles.get(buildingTile).setHighlited(false);
+				tiles.get(buildingTile).setHighlighted(false);
 				prevBuildingTile = buildingTile;
 				buildingTile = -1; // Set the building tile back to -1
 			}
