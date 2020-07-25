@@ -13,12 +13,14 @@ public class SplashScreenState implements IState {
     private Game game;
     private Engine engine;
     private BufferedImage splash;
+    private BufferedImage text;
     private int counter;
     private int counter2;
     private boolean soundPlayed = false;
     private boolean imageFinished = false;
     private boolean textFinished = false;
     private boolean imageLoaded = false;
+    private boolean textLoaded = false;
     private boolean soundLoaded = false;
     private Sound splashSound;
     
@@ -33,6 +35,9 @@ public class SplashScreenState implements IState {
     public void render(Graphics g, int fps) {
     	if (!imageLoaded)
     		this.splash = engine.getResourceManager().getTexture("splash");
+    	
+    	if (!textLoaded)
+    		this.text = engine.getResourceManager().getTexture("splashHEGE");
     	
     	if (!soundLoaded)
             this.splashSound = engine.getResourceManager().getSound("hexagonIntro");
@@ -54,33 +59,17 @@ public class SplashScreenState implements IState {
         }
 
         if (imageFinished && splashSound.getTimeInSeconds() > 1.3570748E13) {
-            counter2 ++;
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setColor(Color.white);
-    		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-            g2d.setFont(new Font("Calibri", Font.BOLD, 25));
-            g2d.drawString("COLONIES BY HEXAGON SOFTWARE, COPYRIGHT (C) 2020 HEXAGON SOFTWARE.", 
-            		1, g2d.getFontMetrics().getHeight());
-            g2d.drawString("HEXAGON ENGINE V"+Engine.VERSION+" COPYRIGHT (C) 2020 HEXAGON SOFTWARE.", 
-            		1, g2d.getFontMetrics().getHeight()*2);
-            
-            String[] strings = new String[] {
-            		"Powered by HEGE",
-            		"(C) 2020 HEXAGON SOFTWARE. The Hexagon Engine alongside Colonies lie under the 3-Clause BSD License.",
-            		"The license file can be found at https://t1p.de/0fs8 (Github Redirect).",
-            		"The Hexagon Software Logo belongs to Hexagon Software and may not be claimed as your own!"
-            };
-            
-            g2d.setFont(new Font("Calibri", Font.BOLD, 50));
-            
-            for (int i = 0; i < strings.length; i++)
-            	StringRenderer.drawString(g2d, strings[i], y*4+(g2d.getFontMetrics().getHeight()*(i+1)), game.getWindow().getWidth(), StringRenderer.CENTER);
+        	x = (game.getWindow().getWidth() - text.getWidth(null)) / 2;
+            y = (game.getWindow().getHeight() - text.getHeight(null)) / 2;
+        	
+            g.drawImage(text, 0, 0, game.getWindow().getWidth(), game.getWindow().getHeight(), null);
         }
 
         if (!splashSound.isOpen() && soundPlayed) {
             textFinished = true;
         }
         imageLoaded = true;
+        textLoaded = true;
         soundLoaded = true;
     }
 

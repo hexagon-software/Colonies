@@ -17,6 +17,7 @@ public class ResourceLoader {
 	// Loads all textures
 	private static void loadTextures(ResourceManager rm) {
 		rm.addTexture("splash", "/assets/img/splash.png");
+		rm.addTexture("splashHEGE", "/assets/img/splashHEGE.png");
 		rm.addTexture("icon", "/assets/img/icon.png");
 		
 		// Leave these commented until some images for them are added to the assets
