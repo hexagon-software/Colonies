@@ -10,6 +10,8 @@ public class GrassTile implements ITile {
 	private boolean highlited = false;
 	private Engine engine;
 	
+	private int x, y;
+	
 	public GrassTile(Game game) {
 		this.engine = game.getEngine();
 	}
@@ -29,15 +31,19 @@ public class GrassTile implements ITile {
 
 	@Override
 	public void setX(int x) {
-		// TODO Auto-generated method stub
-		
+		this.x = x;
 	}
 
 	@Override
 	public void setY(int y) {
-		// TODO Auto-generated method stub
-		
+		this.y = y;
 	}
+	
+	@Override
+	public int getX() { return this.x; }
+	
+	@Override
+	public int getY() { return this.y; }
 
 	@Override
 	public void setBuilding(IBuilding build) {
