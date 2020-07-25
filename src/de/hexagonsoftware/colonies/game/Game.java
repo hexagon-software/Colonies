@@ -16,7 +16,6 @@ import de.hexagonsoftware.colonies.game.input.MouseInput;
 import de.hexagonsoftware.colonies.game.tiles.*;
 import de.hexagonsoftware.colonies.game.util.PerlinNoise;
 import de.hexagonsoftware.colonies.game.util.ResourceLoader;
-import de.hexagonsoftware.colonies.game.util.Vector3;
 import de.hexagonsoftware.colonies.game.util.Vector3d;
 
 public class Game implements Runnable {

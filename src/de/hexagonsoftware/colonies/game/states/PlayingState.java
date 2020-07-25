@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
-import de.hexagonsoftware.colonies.engine.Reference;
 import de.hexagonsoftware.colonies.engine.graphics.polys.Hexagon;
 import de.hexagonsoftware.colonies.game.Game;
 import de.hexagonsoftware.colonies.game.states.playing.ChoiceMenuRender;

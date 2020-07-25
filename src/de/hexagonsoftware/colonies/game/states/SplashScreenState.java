@@ -1,34 +1,35 @@
 package de.hexagonsoftware.colonies.game.states;
 
-import de.hexagonsoftware.colonies.engine.Engine;
-import de.hexagonsoftware.colonies.engine.graphics.StringRenderer;
-import de.hexagonsoftware.colonies.engine.sound.Sound;
-import de.hexagonsoftware.colonies.game.Game;
-
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+
+import de.hexagonsoftware.colonies.engine.Engine;
+import de.hexagonsoftware.colonies.engine.sound.Sound;
+import de.hexagonsoftware.colonies.game.Game;
 
 public class SplashScreenState implements IState {
     private Game game;
     private Engine engine;
     private BufferedImage splash;
     private BufferedImage text;
-    private int counter;
-    private int counter2;
+    
+    private int counter = 0;
+    
     private boolean soundPlayed = false;
     private boolean imageFinished = false;
     private boolean textFinished = false;
+    
     private boolean imageLoaded = false;
     private boolean textLoaded = false;
     private boolean soundLoaded = false;
+    
     private Sound splashSound;
     
     public SplashScreenState(Game game, Engine engine) {
         this.game = game;
         this.engine = engine;
-        this.counter = 0;
-        this.counter2 = 0;
     }
 
     @Override
@@ -51,11 +52,7 @@ public class SplashScreenState implements IState {
         }
         
         if (splashSound.getTimeInSeconds() > 1.3570748E13) {
-            counter = 0;
             imageFinished = true;
-        }
-        if (!imageFinished) {
-            counter++;
         }
 
         if (imageFinished && splashSound.getTimeInSeconds() > 1.3570748E13) {
@@ -88,6 +85,8 @@ public class SplashScreenState implements IState {
         if (textFinished) {
             game.getStateMachine().activateState("playing");
         }
+        
+        counter++;
     }
 
 	@Override
