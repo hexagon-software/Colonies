@@ -24,9 +24,13 @@ public class ChoiceMenuRender {
 		
 		// Draw the Options
 		g2d.drawString("[ESC] Exit", 110, height-(200-(g.getFontMetrics().getHeight())));
-		for (int i = 0; i < choices.length; i++) {
-			g2d.drawString(i+": "+choices[i], 110,
-					height-(200-(g.getFontMetrics().getHeight()*(i+2))));
+		try {
+			for (int i = 0; i < choices.length; i++) {
+				g2d.drawString(i+": "+choices[i], 110,
+						height-(200-(g.getFontMetrics().getHeight()*(i+2))));
+			}
+		} catch (NullPointerException e) {
+			return;
 		}
 	}
 }
