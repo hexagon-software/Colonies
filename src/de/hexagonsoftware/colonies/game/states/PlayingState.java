@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
+import de.hexagonsoftware.colonies.engine.Reference;
 import de.hexagonsoftware.colonies.engine.graphics.polys.Hexagon;
 import de.hexagonsoftware.colonies.game.Game;
 import de.hexagonsoftware.colonies.game.states.playing.ChoiceMenuRender;
@@ -101,11 +102,15 @@ public class PlayingState implements IState {
 				// Check if choice is possible
 				if (choices.length < choice+1)
 					return; // Return if not
-					
-				tiles.get(buildingTile).createBuilding(choice); // Tell the Tile to create the building of the given ID (choice)
-				buildingChoiceActive = false; // Deactivate the choice menu
-				tiles.get(buildingTile).setHighlighted(false);
-				buildingTile = -1; // Set the building tile back to -1
+				
+				try {
+					tiles.get(buildingTile).createBuilding(choice); // Tell the Tile to create the building of the given ID (choice)
+					buildingChoiceActive = false; // Deactivate the choice menu
+					tiles.get(buildingTile).setHighlighted(false);
+					buildingTile = -1; // Set the building tile back to -1
+				} catch (IndexOutOfBoundsException ex) {
+					return;
+				}
 			}
 		}
 	}

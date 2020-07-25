@@ -29,7 +29,7 @@ public class Game implements Runnable {
 	
 	public int size = 7;
 	private Map<Integer, Vector3d> noiseMap;
-	private Vector3[] tileMap = new Vector3[size*size];
+	private ITile[] tileMap = new ITile[size*size];
 	
 	private static double time = 0;
 	
@@ -107,11 +107,11 @@ public class Game implements Runnable {
 				frames = 0;
 			}
 			
-			try {
+			/*try {
 				Thread.sleep(15);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
-			}
+			}*/
 		}
 	}
 	
@@ -149,15 +149,21 @@ public class Game implements Runnable {
 			double y = tile.y;
 			
 			if (noise < NoiseVals.getValues()[0]) {
-				tileMap[i] = new Vector3(x, y, new GrassTile(this));
+				GrassTile tempTile = new GrassTile(this);
+				tempTile.setX((int) x);
+				tempTile.setY((int) y);
+				tileMap[i] = tempTile;
 			} else {
-				tileMap[i] = new Vector3(x, y, new StoneTile());
+				StoneTile tempTile = new StoneTile();
+				tempTile.setX((int) x);
+				tempTile.setY((int) y);
+				tileMap[i] = tempTile;
 			}
 		}
 	}
 	
 	public GameWindow getWindow() { return this.window; }
-	public Vector3[] getMap() { return this.tileMap; }
+	public ITile[] getMap() { return this.tileMap; }
 	public Engine getEngine() { return this.engine; }
 	
 	public StateMachine getStateMachine() {

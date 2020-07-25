@@ -38,8 +38,8 @@ public class MapRenderer {
                 int x = (int) (origin.x + xOff * (col * 2 + 1 - cols));
                 int y = (int) (origin.y + yOff * (row - half) * 3);
                 
-                int color = (int) ((ITile) game.getMap()[row+col].z).getColor();
-                ITile tile = (ITile) game.getMap()[row+col].z;
+                int color = (int) ((ITile) game.getMap()[row+col]).getColor();
+                ITile tile = (ITile) game.getMap()[row+col];
                 tile.setX(x);
                 tile.setY(y);
                 
