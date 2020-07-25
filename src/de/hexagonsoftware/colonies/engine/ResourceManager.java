@@ -16,7 +16,7 @@ public class ResourceManager {
 		tempResource.setImagePath(path);
 		tempResource.loadImage();
 		textures.put(name, tempResource);
-		Reference.logger.info("Registered new Texture Resource \""+name+"\" (No. "+textures.size()+")");
+		Reference.logger.info("Registered new Texture Resource \""+name+"\" ("+textures.size()+")");
 	}
 	
 	public void addSound(String name, String path) {
@@ -24,7 +24,7 @@ public class ResourceManager {
 		tempResource.setSoundPath(path);
 		tempResource.loadSound();
 		sounds.put(name, tempResource);
-		Reference.logger.info("Registered new Sound Resource \""+name+"\" (No. "+sounds.size()+")");
+		Reference.logger.info("Registered new Sound Resource \""+name+"\" ("+sounds.size()+")");
 	}
 
 	public BufferedImage getTexture(String name) {

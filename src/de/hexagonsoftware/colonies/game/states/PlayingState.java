@@ -28,14 +28,12 @@ public class PlayingState implements IState {
 	
 	private boolean buildingChoiceActive = false;
 	private int buildingTile;
-	private int prevBuildingTile;
 	private String[] choices;
 	
 	public PlayingState(Game game) {
 		this.game = game;
 		this.hexList = new ArrayList<>();
 		this.tiles = new ArrayList<>();
-		this.prevBuildingTile = -1;
 	}
 	
 	@Override
@@ -56,9 +54,9 @@ public class PlayingState implements IState {
 		// Building Choice Highlight activation
 		// The highlight for some reason renders also for non highlighted tiles.
 		// Please help me
-		//if (buildingChoiceActive && buildingTile != -1) {
-		//	tiles.get(buildingTile).setHighlighted(true);
-		//}
+		if (buildingChoiceActive && buildingTile != -1) {
+			tiles.get(buildingTile).setHighlighted(true);
+		}
 	}
 
 	@Override
@@ -71,7 +69,6 @@ public class PlayingState implements IState {
 				if (hexList.get(i).intersects(r)) {
 					buildingChoiceActive = true;
 					buildingTile = i;
-					tiles.get(i).setHighlighted(true);
 				} else {
 					if (tiles.get(i).hightlightActive()) {
 						tiles.get(i).setHighlighted(false);
@@ -108,7 +105,6 @@ public class PlayingState implements IState {
 				tiles.get(buildingTile).createBuilding(choice); // Tell the Tile to create the building of the given ID (choice)
 				buildingChoiceActive = false; // Deactivate the choice menu
 				tiles.get(buildingTile).setHighlighted(false);
-				prevBuildingTile = buildingTile;
 				buildingTile = -1; // Set the building tile back to -1
 			}
 		}
