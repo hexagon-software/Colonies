@@ -64,8 +64,8 @@ public class Sound {
 		return TimeUnit.MICROSECONDS.convert(clip.getMicrosecondPosition(), TimeUnit.SECONDS);
 	}
 
-	public boolean isOpen() {
-		return clip.isOpen();
+	public boolean isPlaying() {
+		return clip.isRunning();
 	}
 	
     /**

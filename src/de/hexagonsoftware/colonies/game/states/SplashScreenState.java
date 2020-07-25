@@ -65,7 +65,7 @@ public class SplashScreenState implements IState {
             g.drawImage(text, 0, 0, game.getWindow().getWidth(), game.getWindow().getHeight(), null);
         }
 
-        if (!splashSound.isOpen() && soundPlayed) {
+        if (!splashSound.isPlaying() && soundPlayed) {
             textFinished = true;
         }
         imageLoaded = true;
