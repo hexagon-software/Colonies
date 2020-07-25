@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
+import de.hexagonsoftware.colonies.Reference;
 import de.hexagonsoftware.colonies.engine.graphics.polys.Hexagon;
 import de.hexagonsoftware.colonies.game.Game;
 import de.hexagonsoftware.colonies.game.states.playing.ChoiceMenuRender;
@@ -76,6 +77,7 @@ public class PlayingState implements IState {
 				}
 			}
 		} catch (ConcurrentModificationException e) {
+			Reference.logger.error("An exception occured whilst handling the players input!");
 			return;
 		}
 	}
@@ -108,6 +110,7 @@ public class PlayingState implements IState {
 					tiles.get(buildingTile).setHighlighted(false);
 					buildingTile = -1; // Set the building tile back to -1
 				} catch (IndexOutOfBoundsException ex) {
+					Reference.logger.error("An exception occured whilst handling the players input!");
 					return;
 				}
 			}
