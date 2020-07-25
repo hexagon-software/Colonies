@@ -65,7 +65,7 @@ public class Sound {
 	}
 
 	public boolean isPlaying() {
-		return clip.isRunning();
+		return clip.isActive();
 	}
 	
     /**
